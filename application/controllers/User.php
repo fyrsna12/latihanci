@@ -18,7 +18,7 @@ class User extends CI_Controller
 
 	public function register()
 	{
-		$this->load->view('templates/auth_header');
+		$this->load->view('templates/auth_header, $data');
 		$this->load->view('auth/register');
 		$this->load->view('templates/auth_footer');
 	}

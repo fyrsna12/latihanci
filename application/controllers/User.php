@@ -16,15 +16,13 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
-        // FIX: Tambahkan helper dan library penting yang hilang
-        $this->load->helper('url');     // Untuk fungsi redirect()
-        $this->load->database();    // Untuk fungsi $this->db->insert()
+        $this->load->helper('url');     
+        $this->load->database();    
     }
 
     public function index()
     {
         $data['title'] = 'Login';
-        // FIX: Kirim data $title ke view
         $this->load->view('templates/auth_header', $data); 
         $this->load->view('auth/login');
         $this->load->view('templates/auth_footer');
@@ -33,7 +31,6 @@ class User extends CI_Controller
     public function register()
     {
         $data['title'] = 'Register';
-        // FIX: Kirim data $title ke view
         $this->load->view('templates/auth_header', $data); 
         $this->load->view('auth/register');
         $this->load->view('templates/auth_footer');
@@ -41,8 +38,7 @@ class User extends CI_Controller
 
     public function registration()
     {
-        // Set rules validation
-        // Catatan: Pastikan field di HTML kamu 'password1' dan 'password2'
+        
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'This email is already registered!'
@@ -54,25 +50,20 @@ class User extends CI_Controller
         $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|trim|matches[password1]');
 
         if ($this->form_validation->run() == FALSE) {
-            // Jika validasi gagal, panggil register (akan me-load view dengan error validation)
             $this->register();
         } else {
-            // Jika validasi sukses
             $data = array(
-                'name' => htmlspecialchars($this->input->post('name', true)), // FIX: Lebih aman
-                'email' => htmlspecialchars($this->input->post('email', true)), // FIX: Lebih aman
+                'name' => htmlspecialchars($this->input->post('name', true)), 
+                'email' => htmlspecialchars($this->input->post('email', true)), 
                 'image' => 'user.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'id_role' => 2,
                 'is_active' => 1,
                 'date_created' => time()
             );
-
-            // Perhatian: Jika masih gagal insert, cek database.php dan status MySQL/MariaDB kamu.
             $this->db->insert('user', $data); 
-            
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your account has been created!</div>');
-            redirect('user'); // Akan redirect ke halaman login (user/index)
+            redirect('user'); 
         }
     }
 }

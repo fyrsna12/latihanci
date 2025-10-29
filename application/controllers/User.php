@@ -66,6 +66,44 @@ class User extends CI_Controller
             redirect('user'); 
         }
     }
+    public function login()
+    {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
 
-	
+        if($user){
+            if(password_verify($password,$user['password'])){
+                $data=[
+                    'id_user'=>$user['id_user'],
+                    'name'=>$user['name'],
+                    'email'=>$user['email'],
+                    'id_role'=>$user['id_role'],
+                ];
+                $this->session->set_userdata($data);
+             
+            if($user['id_role'] ==1 ){
+                redirect('admin');
+            } else {
+                redirect('siswa');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password</div>');
+            redirect('user');
+        } 
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email not registered</div>');
+            redirect('user');
+        }
+    }	
+    
+    public function logout()
+    {
+        $this->session->unset_userdata('id_user');
+        $this->session->unset_userdata('name');
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('id_role');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You have been logged out</div>');
+        redirect('user');
+    }
 }

@@ -13,6 +13,13 @@ class Siswa extends CI_Controller
 {
     public function index()
 	{
-		$this->load->view('welcome_message');
+		$data['title'] = 'My Profile';
+        
+        $data ['admin'] = $this->db->get_where('user', ['email' => 
+            $this->session->userdata('email')])->row_array();
+            
+        $this->load->view('templates/header', $data);  
+        $this->load->view('siswa/index', $data);       
+        $this->load->view('templates/footer'); 
 	}
 }

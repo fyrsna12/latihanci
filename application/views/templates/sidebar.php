@@ -28,27 +28,30 @@
     </div>
 
     <!-- SUB-MENU SESUAI MENU -->
-     
+     <?php
+     $menuId = $m['id_menu'];
+     $querySubMenu = "SELECT *
+    FROM `user_sub_menu` 
+    JOIN `user_menu` ON `user_sub_menu`.`menu_id` = `user_menu`.`id_menu`
+    WHERE `user_sub_menu`.`menu_id` = $menuId
+    AND `user_sub_menu`.`is_active` = 1
+    ";
+    $subMenu = $this->db->query($querySubMenu)->result_array();
+     ?>
+
+     <?php foreach($subMenu as $sm) : ?>
+
+         <li class="nav-item">
+        <a class="nav-link" href="<?= base_url($sm['url']); ?>">
+            <i class="<?= $sm['icon']; ?>"></i>
+            <span><?= $sm['title']; ?></span></a>
+         </li>
+
+     <?php endforeach; ?>
+
+      <hr class="sidebar-divider">
 
     <?php endforeach; ?>
-
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('admin'); ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-
-    <hr class="sidebar-divider">
-
-    <div class="sidebar-heading">
-        User
-    </div>
-
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('admin/profile'); ?>">
-            <i class="fas fa-users fa-fw"></i>
-            <span>Dashboard</span></a>
-    </li>
     
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('user/logout'); ?>">

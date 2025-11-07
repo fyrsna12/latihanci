@@ -11,15 +11,26 @@
 
     <!-- QUERY MENU  -->
      <?php 
-     $querymenu = "SELECT column-names
-                    FROM table-name1 
-                    JOIN table-name2 ON column-name1 = column-name2
-                    WHERE condition";
+     $id_role = $this->session->userdata('id_role');
+     $querymenu = "SELECT `user_menu`.`id_menu`, `menu`
+                    FROM `user_menu` 
+                    JOIN `user_access_menu` ON `user_menu`.`id_menu` = `user_access_menu`.`id_menu`
+                    WHERE `user_access_menu`.`id_role` = $id_role
+                    ORDER BY `user_access_menu`.`id_menu` ASC
+                    ";
+    $menu = $this->db->query($querymenu)->result_array();
      ?>
 
+    <!-- LOOPING MENU -->
+     <?php foreach ($menu as $m) : ?>
     <div class="sidebar-heading">
-        Administrator
+        <?= $m['menu']; ?>
     </div>
+
+    <!-- SUB-MENU SESUAI MENU -->
+     
+
+    <?php endforeach; ?>
 
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('admin'); ?>">
@@ -36,7 +47,7 @@
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('admin/profile'); ?>">
             <i class="fas fa-users fa-fw"></i>
-            <span>My Profile</span></a>
+            <span>Dashboard</span></a>
     </li>
     
     <li class="nav-item">

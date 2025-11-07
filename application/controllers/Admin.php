@@ -21,7 +21,7 @@ class Admin extends CI_Controller
     
     public function index()
     {
-        $data['title'] = 'My Profile';
+        $data['title'] = 'Dashboard';
         
         $data ['admin'] = $this->db->get_where('user', ['email' => 
             $this->session->userdata('email')])->row_array();
@@ -30,4 +30,5 @@ class Admin extends CI_Controller
         $this->load->view('admin/index', $data);       
         $this->load->view('templates/footer');       
     }
+    
 }

@@ -77,6 +77,7 @@ class Menu extends CI_Controller
 
     $data['subMenu'] = $this->db->get('user_sub_menu')->result_array();
     $data['allMenu'] = $this->db->get('user_menu')->result_array();
+    $data['menu'] = $this->db->get('user_menu')->result_array();
 
     $this->load->view('templates/header', $data);  
     $this->load->view('menu/submenu', $data);       

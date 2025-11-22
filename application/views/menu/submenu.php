@@ -12,6 +12,8 @@
         Add New Submenu
         </a>
 
+        
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -24,24 +26,37 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php $i = 1; ?>
-                <?php foreach ($subMenu as $sm) : ?>
-                <tr>
-                    <th scope="row"><?= $i; ?></th>
-                    <td><?= $sm['title']; ?></td>
-                    <td><?= $sm['menu_id']; ?></td>
-                    <td><?= $sm['url']; ?></td>
-                    <td><?= $sm['icon']; ?></td>
-                    <td><?= $sm['is_active']; ?></td>
-            <td>
-             <a href="" class="badge badge-success">edit</a>
-             <a href="" class="badge badge-danger">delete</a>
-            </td>
-                </tr>
-                <?php $i++; ?>
-                <?php endforeach; ?>
-            </tbody>
+<tbody>
+    <?php $i = 1; ?>
+    <?php foreach ($subMenu as $sm) : ?>
+    <tr>
+        <th scope="row"><?= $i; ?></th>
+        <td><?= $sm['title']; ?></td>
+        <td>
+            <?php 
+            if(isset($sm['menu'])) {
+                echo $sm['menu'];
+            } else {
+                $menuNames = [
+                    1 => 'Admin',
+                    2 => 'User',
+                    3 => 'Menu'
+                ];
+                echo isset($menuNames[$sm['menu_id']]) ? $menuNames[$sm['menu_id']] : $sm['menu_id'];
+            }
+            ?>
+        </td>
+        <td><?= $sm['url']; ?></td>
+        <td><?= $sm['icon']; ?></td>
+        <td><?= $sm['is_active']; ?></td> 
+        <td>
+            <a href="" class="badge badge-success">edit</a>
+            <a href="" class="badge badge-danger">delete</a>
+        </td>
+    </tr>
+    <?php $i++; ?>
+    <?php endforeach; ?>
+</tbody>
         </table>
        </div>
    </div>

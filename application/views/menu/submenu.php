@@ -12,7 +12,7 @@
         Add New Submenu
         </a>
 
-        <table class="table table-hover">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -30,7 +30,7 @@
                 <tr>
                     <th scope="row"><?= $i; ?></th>
                     <td><?= $sm['title']; ?></td>
-                    <td><?= $sm['menu']; ?></td>
+                    <td><?= $sm['menu_id']; ?></td>
                     <td><?= $sm['url']; ?></td>
                     <td><?= $sm['icon']; ?></td>
                     <td><?= $sm['is_active']; ?></td>

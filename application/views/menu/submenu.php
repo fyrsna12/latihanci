@@ -4,15 +4,17 @@
 
    <div class="row">
        <div class="col-lg">
-       <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+       <?php if (validation_errors()) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= validation_errors(); ?>
+        </div>
+       <?php endif; ?> 
 
        <?= $this->session->flashdata('message'); ?>
 
         <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">
         Add New Submenu
         </a>
-
-        
 
         <table class="table table-bordered">
             <thead>
@@ -73,28 +75,55 @@
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="newSubMenuModalLabel">Add New Sub Menu</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-       </button>
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <form action="<?= base_url('menu/submenu'); ?>" method="post">
-      <div class="modal-body">
-        <div class="form-group">
-             <input type="text" class="form-control form-control-user" 
-             id="title" name="title" placeholder="Submenu title">
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control form-control-user" 
+                   id="title" name="title" placeholder="Submenu title">
+          </div>
+          
+          <div class="form-group">
+            <select name="menu_id" id="menu_id" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($menu as $m) : ?>
+              <option value="<?= $m['id_menu']; ?>"><?= $m['menu']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <input type="text" class="form-control form-control-user" 
+                   id="url" name="url" placeholder="Submenu url">
+          </div>
+          
+          <div class="form-group">
+            <input type="text" class="form-control form-control-user" 
+                   id="icon" name="icon" placeholder="Submenu icon">
+          </div>
+          
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" 
+                     type="checkbox" 
+                     value="1" 
+                     id="is_active" 
+                     name="is_active" 
+                     checked>
+              <label class="form-check-label" for="is_active">
+                Active?
+              </label>
+            </div>
+          </div>
+        </div> 
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
         </div>
-        <form action="" class="group"></form>
-        <select name="menu_id" id="menu_id" class="form-control">
-            <option value="">Select Menu</option>
-            <?php foreach ($menu as $m) : ?>
-            <option value="<?= $m['id_menu']; ?>"><?= $m['menu']; ?></option>
-            <?php endforeach; ?>
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Add</button>
-      </div>
       </form>
-    </div>
+   
   </div>
 </div>

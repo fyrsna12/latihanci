@@ -1,0 +1,10 @@
+{
+    "phpstan.enabled": false,
+    "intelephense.diagnostics.undefinedTypes": false,
+    "intelephense.diagnostics.undefinedFunctions": false,
+    "intelephense.diagnostics.undefinedMethods": false,
+    "intelephense.diagnostics.undefinedProperties": false,
+    "intelephense.files.exclude": [
+        "**/application/helpers/**"
+    ]
+}

@@ -17,6 +17,7 @@ class Admin extends CI_Controller
         $this->load->helper('url');
         $this->load->library('session');
         $this->load->database(); 
+        is_logged_in(); 
     }
     
     public function index()

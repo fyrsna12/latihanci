@@ -106,4 +106,10 @@ class User extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You have been logged out</div>');
         redirect('user');
     }
+
+    
+    public function blocked()
+    {
+        $this->load->view('auth/blocked');
+    }
 }

@@ -27,3 +27,16 @@ function is_logged_in()
         redirect('auth/blocked');
     }
 }
+
+function check_access($id_role, $id_menu)
+{
+    $ci = get_instance();
+
+    $ci->db->where('id_role', $id_role);
+    $ci->db->where('id_menu', $id_menu);
+    $result = $ci->db->get('user_access_menu');
+
+    if ($result->num_rows() > 0){
+        return "checked='checked'";
+    }
+}

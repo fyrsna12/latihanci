@@ -51,10 +51,10 @@
         <td><?= $sm['url']; ?></td>
         <td><?= $sm['icon']; ?></td>
         <td><?= $sm['is_active']; ?></td> 
-        <td>
-            <a href="" class="badge badge-success">edit</a>
-            <a href="" class="badge badge-danger">delete</a>
-        </td>
+<td>
+    <a href="<?= base_url('menu/editsubmenu/') . $sm['id_submenu']; ?>" class="badge badge-success">edit</a>
+    <a href="<?= base_url('menu/deletesubmenu/') . $sm['id_submenu']; ?>" class="badge badge-danger" onclick="return confirm('Yakin hapus?')">delete</a>
+</td>
     </tr>
     <?php $i++; ?>
     <?php endforeach; ?>

@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body style="background: linear-gradient(180deg, #4e73df 0%, #224abe 100%); min-height: 100vh;">
 
     <div class="container">
 

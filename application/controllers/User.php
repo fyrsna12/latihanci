@@ -17,11 +17,16 @@ class User extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->helper('url');     
-        $this->load->database();    
+        $this->load->database(); 
     }
 
     public function index()
     {
+
+        if ($this->session->userdata('email')) {
+            redirect('siswa');
+        }
+
         $data['title'] = 'Login';
         $this->load->view('templates/auth_header', $data); 
         $this->load->view('auth/login');
@@ -38,6 +43,10 @@ class User extends CI_Controller
 
     public function registration()
     {
+
+        if ($this->session->userdata('email')) {
+            redirect('siswa');
+        }
         
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [

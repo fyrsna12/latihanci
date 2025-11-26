@@ -36,7 +36,7 @@ public function edit()
         $name = $this->input->post('name');
         $email = $this->input->post('email');
 
-        //cek jika ada gambar yg di upload
+        //cek kalau ada gambar yg di upload
         $upload_image = $_FILES['image']['name'];
 
         if($upload_image) {
@@ -46,16 +46,18 @@ public function edit()
 
             $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('image')) {
-            $old_image = $data['admin']['image'];
+if ($this->upload->do_upload('image')) {
+    $old_image = $data['admin']['image'];
+ 
+    $protected_images = ['default.jpg', 'user.jpg', 'admin.jpg'];
     
-        if ($old_image != 'default.jpg') {
-            unlink(FCPATH . 'assets/img/profile/' . $old_image);
-        }
+    if (!in_array($old_image, $protected_images) && file_exists(FCPATH . 'assets/img/profile/' . $old_image)) {
+        unlink(FCPATH . 'assets/img/profile/' . $old_image);
+    }
     
-        $new_image = $this->upload->data('file_name');
-        $this->db->set('image', $new_image);
-        } else {
+    $new_image = $this->upload->data('file_name');
+    $this->db->set('image', $new_image);
+} else {
             echo $this->upload->display_errors();
         }
     } 
@@ -71,4 +73,41 @@ public function edit()
     }
 }
 
+public function changepassword()  
+{
+    $data['title'] = 'Change Password';
+    $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    
+    $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
+    $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[3]|matches[new_password2]');
+    $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[3]|matches[new_password1]');
+
+    if($this->form_validation->run() == false) {
+        $this->load->view('templates/header', $data);
+        $this->load->view('siswa/changepassword', $data);
+        $this->load->view('templates/footer');
+    } else {
+        $current_password = $this->input->post('current_password');
+        $new_password = $this->input->post('new_password1');
+        
+        if (!password_verify($current_password, $data['admin']['password'])) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Current Password!</div>'); 
+            redirect('siswa/changepassword');
+        } else {
+            if($current_password == $new_password) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New Password cannot be the same as current!</div>'); 
+                redirect('siswa/changepassword');
+            } else {
+                $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+
+                $this->db->set('password', $password_hash);
+                $this->db->where('email', $this->session->userdata('email'));
+                $this->db->update('user'); 
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password Changed!</div>'); 
+                redirect('siswa/changepassword');
+            }
+        }
+    }
+}
 }

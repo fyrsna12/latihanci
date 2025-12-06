@@ -86,7 +86,25 @@ public function registration()
         ];
 
         $this->db->insert('user', $data); 
+
+        $menus_to_give_access = ['siswa', 'profile'];
+
         $this->db->insert('user_token', $user_token); 
+
+        foreach($menus_to_give_access as $menu_name) {
+    $menu = $this->db->select('id_menu')->get_where('user_menu', ['menu' => $menu_name])->row_array();
+    
+    if($menu) {
+        $this->db->insert('user_access_menu', [
+            'id_role' => 2,
+            'id_menu' => $menu['id_menu'],
+            'can_view' => 1,
+            'can_create' => 0,
+            'can_edit' => ($menu_name == 'profile') ? 1 : 0,
+            'can_delete' => 0
+        ]);
+    }
+}
 
         $subject = 'Account Verification';
         $message = 'Click this link to verify your account: 
@@ -165,6 +183,7 @@ public function login()
 {
     $email = $this->input->post('email');
     $password = $this->input->post('password');
+    
     $user = $this->db->get_where('user', ['email' => $email])->row_array();
 
     if($user){

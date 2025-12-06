@@ -32,8 +32,8 @@
      $menuId = $m['id_menu'];
      $querySubMenu = "SELECT *
     FROM `user_sub_menu` 
-    JOIN `user_menu` ON `user_sub_menu`.`menu_id` = `user_menu`.`id_menu`
-    WHERE `user_sub_menu`.`menu_id` = $menuId
+    JOIN `user_menu` ON `user_sub_menu`.`id_menu` = `user_menu`.`id_menu`
+    WHERE `user_sub_menu`.`id_menu` = $menuId
     AND `user_sub_menu`.`is_active` = 1
     ";
     $subMenu = $this->db->query($querySubMenu)->result_array();

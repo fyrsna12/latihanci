@@ -3,29 +3,20 @@ function is_logged_in()
 {
     $ci =& get_instance();
 
-    if(!$ci->session->userdata('email')) {
-        redirect('user');
-    } 
- 
-    $id_role = $ci->session->userdata('id_role');
-    $menu = $ci->uri->segment(1);
+    $current_controller = $ci->uri->segment(1);
 
-    $queryMenu = $ci->db->get_where('user_menu', ['menu' => $menu])->row_array();
- 
-    if(!$queryMenu) {
-        return; 
+    if ($current_controller == 'user' || $current_controller == 'auth') {
+        if ($ci->session->userdata('email') && $ci->uri->segment(2) == '') {
+            redirect('siswa');
+        }
+        return;
     }
     
-    $id_menu = $queryMenu['id_menu'];
-
-    $userAccess = $ci->db->get_where('user_access_menu', [
-        'id_role' => $id_role, 
-        'id_menu' => $id_menu
-    ]);
-
-    if($userAccess->num_rows() < 1) {
-        redirect('auth/blocked');
+    if(!$ci->session->userdata('email')) {
+        redirect('user');
     }
+    
+    // Kalau mau cek menu access, baru uncomment bagian bawah
 }
 
 function check_access($id_role, $id_menu)

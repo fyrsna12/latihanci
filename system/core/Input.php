@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/userguide3/libraries/input.html
  */
+#[AllowDynamicProperties]
 class CI_Input {
 
 	/**
@@ -907,8 +908,8 @@ class CI_Input {
 	public function method($upper = FALSE)
 	{
 		return ($upper)
-			? strtoupper($this->server('REQUEST_METHOD'))
-			: strtolower($this->server('REQUEST_METHOD'));
+			? strtoupper((string) $this->server('REQUEST_METHOD'))
+			: strtolower((string) $this->server('REQUEST_METHOD'));
 	}
 
 	// ------------------------------------------------------------------------

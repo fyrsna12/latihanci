@@ -16,7 +16,7 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['title'] = 'Dashboard Admin';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $this->db->select('um.*, uam.can_view, uam.can_create, uam.can_edit, uam.can_delete');
         $this->db->from('user_menu um');
@@ -27,7 +27,6 @@ class Admin extends CI_Controller
         $data['menu'] = $this->db->get()->result_array();
         
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('templates/footer');
     }
@@ -35,7 +34,7 @@ class Admin extends CI_Controller
     public function users()
     {
         $data['title'] = 'User Management';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $this->db->select('u.*, ur.role as role_name');
         $this->db->from('user u');
@@ -44,7 +43,6 @@ class Admin extends CI_Controller
         $data['users'] = $this->db->get()->result_array();
         
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('admin/users', $data);
         $this->load->view('templates/footer');
     }
@@ -52,12 +50,11 @@ class Admin extends CI_Controller
     public function role()
     {
         $data['title'] = 'Role Management';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['roles'] = $this->db->get('user_role')->result_array();
         
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_admin', $data); // TAMBAHKAN SIDEBAR
         $this->load->view('admin/role', $data);
         $this->load->view('templates/footer');
     }
@@ -65,7 +62,7 @@ class Admin extends CI_Controller
     public function roleAccess($id_role)
     {
         $data['title'] = 'Role Access';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['role'] = $this->db->get_where('user_role', ['id_role' => $id_role])->row_array();
         
@@ -80,7 +77,6 @@ class Admin extends CI_Controller
         $data['accessed_menus'] = array_column($access_result, 'id_menu');
 
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('admin/role_access', $data);
         $this->load->view('templates/footer');
     }
@@ -116,10 +112,9 @@ class Admin extends CI_Controller
     public function profile()
     {
         $data['title'] = 'My Profile';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('admin/profile', $data);
         $this->load->view('templates/footer');
     }
@@ -127,14 +122,13 @@ class Admin extends CI_Controller
     public function edit_profile()
     {
         $data['title'] = 'Edit Profile';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $this->form_validation->set_rules('name', 'Full name', 'required|trim');
 
         if($this->form_validation->run() == false)
         {
             $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar_admin', $data);
             $this->load->view('admin/edit_profile', $data);
             $this->load->view('templates/footer');
         } else {

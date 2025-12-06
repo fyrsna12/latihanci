@@ -30,6 +30,7 @@ public function edit()
     if($this->form_validation->run() == false)
     {
         $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
         $this->load->view('siswa/edit', $data);
         $this->load->view('templates/footer');
     } else {

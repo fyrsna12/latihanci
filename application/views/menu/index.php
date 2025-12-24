@@ -40,8 +40,6 @@
 
 </div>
 
-</div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="newMenuModal" tabindex="-1" aria-labelledby="newMenuModalLabel" aria-hidden="true">

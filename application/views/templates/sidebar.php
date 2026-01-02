@@ -50,6 +50,7 @@
     
     <hr class="sidebar-divider">
     
+    <?php if ($role == 1): ?>
     <div class="sidebar-heading">Menu</div>
     <li class="nav-item <?= (isset($title) && $title == 'Menu Management') ? 'active' : '' ?>">
         <a class="nav-link" href="<?= base_url('menu'); ?>">
@@ -59,6 +60,7 @@
     </li>
     
     <hr class="sidebar-divider">
+    <?php endif; ?>
     
     <!-- Logout -->
     <li class="nav-item">

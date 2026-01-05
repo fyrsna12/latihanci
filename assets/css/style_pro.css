@@ -83,7 +83,8 @@ body {
 
 /* --- Sidebar --- */
 .sidebar-pro {
-    background: #1f2937 !important; /* Dark slate */
+    background: #1f2937 !important;
+    /* Dark slate */
     background-image: linear-gradient(180deg, #1f2937 10%, #111827 100%) !important;
 }
 
@@ -102,7 +103,8 @@ body {
 
 .sidebar-pro .nav-item.active .nav-link {
     color: #fff !important;
-    background: rgba(255, 255, 255, 0.08); /* Slightly lighter */
+    background: rgba(255, 255, 255, 0.08);
+    /* Slightly lighter */
     border-left-color: var(--primary);
     font-weight: 600;
 }
@@ -179,7 +181,8 @@ body {
 
 /* Profile User */
 .profile-cover {
-    height: 15rem; /* 240px */
+    height: 15rem;
+    /* 240px */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 1rem 1rem 0 0;
 }

@@ -43,7 +43,7 @@
                             <p class="text-gray-600 mb-4">Please login to your account</p>
                         </div>
                         
-                        <form class="user" method="post" action="<?= base_url('auth/login'); ?>">
+                        <form class="user" method="post" action="<?= base_url('auth'); ?>">
                             <div class="form-group mb-4">
                                 <label class="small text-gray-600 pl-3">Email Address</label>
                                 <input type="email" class="form-control form-control-user-pro"
@@ -73,7 +73,7 @@
                             <a class="small text-gray-500" href="<?= base_url('user/forgotpassword'); ?>">Forgot Password?</a>
                         </div>
                         <div class="text-center">
-                            <a class="small text-primary-pro font-weight-bold" href="<?= base_url('user/register'); ?>">Create an Account!</a>
+                            <a class="small text-primary-pro font-weight-bold" href="<?= base_url('auth/register'); ?>">Create an Account!</a>
                         </div>
                     </div>
                 </div>

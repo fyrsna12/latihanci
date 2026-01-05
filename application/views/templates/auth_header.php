@@ -19,7 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/');?>css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Professional Modern Style -->
+    <link href="<?= base_url('assets/');?>css/style_pro.css" rel="stylesheet">
 
 </head>
 
-<body class="bg-white">
+<body class="login-bg">

@@ -1,0 +1,205 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #4e73df;
+    --primary-dark: #224abe;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+    --bg-gradient-start: #4e73df;
+    --bg-gradient-end: #224abe;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+/* --- Utilities --- */
+.bg-gradient-primary-pro {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+}
+
+.text-primary-pro {
+    color: var(--primary) !important;
+}
+
+.shadow-soft {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025) !important;
+}
+
+.shadow-lg-pro {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.rounded-lg-pro {
+    border-radius: 1rem !important;
+}
+
+.rounded-xl-pro {
+    border-radius: 1.5rem !important;
+}
+
+.card-pro {
+    border: none;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-pro:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+.btn-pro {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    letter-spacing: 0.025em;
+}
+
+.btn-primary-pro {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 6px rgba(78, 115, 223, 0.25);
+    border: none;
+}
+
+.btn-primary-pro:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px rgba(78, 115, 223, 0.3);
+    color: white;
+}
+
+/* --- Sidebar --- */
+.sidebar-pro {
+    background: #1f2937 !important; /* Dark slate */
+    background-image: linear-gradient(180deg, #1f2937 10%, #111827 100%) !important;
+}
+
+.sidebar-pro .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.sidebar-pro .nav-item .nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff !important;
+}
+
+.sidebar-pro .nav-item.active .nav-link {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.08); /* Slightly lighter */
+    border-left-color: var(--primary);
+    font-weight: 600;
+}
+
+.sidebar-pro .sidebar-brand-text {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* --- Login Page --- */
+.login-bg {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+}
+
+.form-control-user-pro {
+    border-radius: 0.75rem !important;
+    padding: 1.25rem 1rem !important;
+    height: auto !important;
+    background-color: #f9fafb !important;
+    border: 1px solid #e5e7eb !important;
+    font-size: 0.95rem;
+}
+
+.form-control-user-pro:focus {
+    background-color: #ffffff !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.15) !important;
+}
+
+/* --- Dashboard --- */
+.dashboard-title {
+    font-weight: 700;
+    color: #111827;
+}
+
+.stat-card-title {
+    color: #6b7280;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.stat-card-value {
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.stat-icon-bg {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+/* Profile User */
+.profile-cover {
+    height: 15rem; /* 240px */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 1rem 1rem 0 0;
+}
+
+.profile-avatar-container {
+    margin-top: -6rem;
+    margin-left: 2rem;
+    position: relative;
+}
+
+.profile-avatar {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    object-fit: cover;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}

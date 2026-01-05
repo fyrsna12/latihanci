@@ -1,6 +1,6 @@
 <?php $role = $this->session->userdata('id_role'); ?>
 
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav sidebar-pro sidebar sidebar-dark accordion" id="accordionSidebar">
     
     <!-- Logo -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin'); ?>">

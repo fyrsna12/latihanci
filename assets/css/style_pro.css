@@ -109,6 +109,10 @@ body {
     font-weight: 600;
 }
 
+.sidebar-pro .nav-item.active .nav-link i {
+    color: #fff !important;
+}
+
 .sidebar-pro .sidebar-brand-text {
     font-weight: 700;
     letter-spacing: 0.05em;

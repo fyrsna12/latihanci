@@ -21,63 +21,78 @@
 
 </head>
 
-<body style="background: linear-gradient(180deg, #4e73df 0%, #224abe 100%); min-height: 100vh;">
+<body class="bg-white">
 
-    <div class="container">
+    <div class="container-fluid p-0">
         <!-- Outer Row -->
-        <div class="row justify-content-center">
-            <div class="col-xl-5 col-lg-6 col-md-9">
+        <div class="row no-gutters h-100vh">
             
-                <!-- Flash Message -->
-                <div class="my-4">
-                    <?= $this->session->flashdata('message'); ?>
-                </div>
-                
-                <div class="card-pro login-card animated--grow-in">
-                    <div class="card-body p-5">
-                        <div class="text-center mb-5">
-                            <div class="sidebar-brand-icon rotate-n-15 text-primary-pro mb-3" style="font-size: 3rem;">
-                                <i class="fas fa-laugh-wink"></i>
-                            </div>
-                            <h1 class="h3 text-gray-900 mb-2">Welcome Back!</h1>
-                            <p class="text-gray-600 mb-4">Please login to your account</p>
+            <div class="col-lg-9 d-none d-lg-block bg-login-image" 
+                 style="background: url('<?= base_url('assets/img/spmb_bg.jpg'); ?>') center / contain no-repeat, linear-gradient(180deg, #a2cfff 0%, #ffffff 50%, #d4a5ff 100%); min-height: 100vh;">
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="col-lg-3 d-flex align-items-center min-vh-100" style="background: linear-gradient(180deg, #a2cfff 0%, #ffffff 50%, #d4a5ff 100%);">
+                <div class="login-form-container w-100 mx-auto px-4">
+                    
+                    <div class="text-center mb-5">
+                       <div class="sidebar-brand-icon rotate-n-15 text-primary-pro mb-3" style="font-size: 3rem;">
+                            <i class="fas fa-laugh-wink"></i>
                         </div>
-                        
-                        <form class="user" method="post" action="<?= base_url('auth'); ?>">
-                            <div class="form-group mb-4">
-                                <label class="small text-gray-600 pl-3">Email Address</label>
-                                <input type="email" class="form-control form-control-user-pro"
-                                    id="email" name="email" 
-                                    placeholder="name@example.com"
-                                    value="<?= set_value('email'); ?>">
-                                <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
-                            </div>
-                            <div class="form-group mb-4">
-                                <label class="small text-gray-600 pl-3">Password</label>
-                                <input type="password" class="form-control form-control-user-pro"
-                                    id="password" name="password" placeholder="Min. 5 characters">
-                                <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
-                            </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox small pl-3">
+                        <h1 class="h3 text-gray-900 mb-2 font-weight-bold">Hi, Welcome to My School!</h1>
+                        <p class="text-gray-500 mb-4">Enter your details to log in your account</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <?= $this->session->flashdata('message'); ?>
+                    </div>
+
+                    <form class="user" method="post" action="<?= base_url('auth'); ?>">
+                        <div class="form-group mb-4">
+                            <label class="small text-gray-600 pl-2">Email Address</label>
+                            <input type="email" class="form-control form-control-user-pro"
+                                id="email" name="email" 
+                                placeholder="name@example.com"
+                                value="<?= set_value('email'); ?>"
+                                style="border-radius: 10px; height: 50px;">
+                            <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="small text-gray-600 pl-2">Password</label>
+                            <input type="password" class="form-control form-control-user-pro"
+                                id="password" name="password" placeholder="Min. 5 characters"
+                                style="border-radius: 10px; height: 50px;">
+                            <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="custom-control custom-checkbox small">
                                     <input type="checkbox" class="custom-control-input" id="customCheck">
                                     <label class="custom-control-label text-gray-600" for="customCheck">Remember Me</label>
                                 </div>
+                                <a class="small font-weight-bold text-primary-pro" href="<?= base_url('user/forgotpassword'); ?>">Forgot Password?</a>
                             </div>
-                            <button type="submit" class="btn btn-primary-pro btn-user btn-block mt-4 mb-3">
-                                Login
-                            </button>
-                        </form>
-                        
-                        <div class="text-center mt-4">
-                            <a class="small text-gray-500" href="<?= base_url('user/forgotpassword'); ?>">Forgot Password?</a>
                         </div>
-                        <div class="text-center">
-                            <a class="small text-primary-pro font-weight-bold" href="<?= base_url('auth/register'); ?>">Create an Account!</a>
+                        <button type="submit" class="btn btn-primary-pro btn-block mt-4 mb-3" style="border-radius: 10px; height: 50px; font-weight: bold; font-size: 1rem;">
+                            Log in
+                        </button>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                         <span class="small text-gray-600">Or login using your account</span>
+                        <div class="mt-3">
+                             <a class="small text-primary-pro font-weight-bold" href="<?= base_url('auth/register'); ?>">Create an Account!</a>
                         </div>
                     </div>
+
+                    <div class="text-center mt-5 text-gray-500 small">
+                        <p class="mb-1">Some courses may allow guest access</p>
+                        <a href="#" class="btn btn-outline-secondary btn-sm px-4" style="border-radius: 20px;">Access as a guest</a>
+                    </div>
+                    
                 </div>
             </div>
+
         </div>
     </div>
 

@@ -32,6 +32,14 @@ class Admin extends CI_Controller
         $this->db->where('is_active', 1);
         $data['submenu_menu'] = $this->db->get()->result_array();
 
+        // Dashboard Stats for TK System
+        $data['count_tk_a'] = $this->db->where('class_name', 'TK A')->count_all_results('user');
+        $data['count_tk_b'] = $this->db->where('class_name', 'TK B')->count_all_results('user');
+        
+        $this->db->where_in('predicate', ['BSH', 'BSB']);
+        $data['count_high_performance'] = $this->db->count_all_results('assessments');
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('templates/footer');

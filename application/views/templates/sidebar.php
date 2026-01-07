@@ -5,7 +5,7 @@
     <!-- Logo -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin'); ?>">
         <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-        <div class="sidebar-brand-text mx-3">CI ADMIN</div>
+        <div class="sidebar-brand-text mx-3">MY SCHOOL</div>
     </a>
     
     <hr class="sidebar-divider">
@@ -59,6 +59,16 @@
         </a>
     </li>
     
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">ACADEMIC</div>
+    <li class="nav-item <?= (isset($title) && $title == 'Penilaian Akademik') ? 'active' : '' ?>">
+        <a class="nav-link" href="<?= base_url('assessment'); ?>">
+            <i class="fas fa-fw fa-graduation-cap"></i>
+            <span>Penilaian Akademik</span>
+        </a>
+    </li>
+
     <hr class="sidebar-divider">
     <?php endif; ?>
     

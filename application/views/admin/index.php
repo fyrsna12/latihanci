@@ -28,8 +28,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="stat-card-title text-primary">Total Users</div>
-                            <div class="stat-card-value">123</div>
+                            <div class="stat-card-title text-primary">Total Students</div>
+                            <div class="stat-card-value"><?= $count_tk_a + $count_tk_b; ?></div>
                         </div>
                         <div class="col-auto">
                             <div class="stat-icon-bg bg-primary text-white rounded-circle shadow-sm">
@@ -41,18 +41,18 @@
             </div>
         </div>
 
-        <!-- Role Card -->
+        <!-- TK A Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card-pro h-100 py-2 border-left-success">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="stat-card-title text-success">Active Roles</div>
-                            <div class="stat-card-value">2</div>
+                            <div class="stat-card-title text-success">Siswa TK A</div>
+                            <div class="stat-card-value"><?= $count_tk_a; ?></div>
                         </div>
                         <div class="col-auto">
                             <div class="stat-icon-bg bg-success text-white rounded-circle shadow-sm">
-                                <i class="fas fa-user-tag"></i>
+                                <i class="fas fa-child"></i>
                             </div>
                         </div>
                     </div>
@@ -60,18 +60,18 @@
             </div>
         </div>
 
-        <!-- Menu Card -->
+        <!-- TK B Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card-pro h-100 py-2 border-left-info">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="stat-card-title text-info">Total Menus</div>
-                            <div class="stat-card-value">5</div>
+                            <div class="stat-card-title text-info">Siswa TK B</div>
+                            <div class="stat-card-value"><?= $count_tk_b; ?></div>
                         </div>
                         <div class="col-auto">
                             <div class="stat-icon-bg bg-info text-white rounded-circle shadow-sm">
-                                <i class="fas fa-folder"></i>
+                                <i class="fas fa-user-graduate"></i>
                             </div>
                         </div>
                     </div>
@@ -79,18 +79,18 @@
             </div>
         </div>
 
-        <!-- Pending Requests Card -->
+        <!-- Performance Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card-pro h-100 py-2 border-left-warning">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="stat-card-title text-warning">Pending Requests</div>
-                            <div class="stat-card-value">18</div>
+                            <div class="stat-card-title text-warning">Progress (BSH/BSB)</div>
+                            <div class="stat-card-value"><?= $count_high_performance; ?></div>
                         </div>
                         <div class="col-auto">
                             <div class="stat-icon-bg bg-warning text-white rounded-circle shadow-sm">
-                                <i class="fas fa-comments"></i>
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>

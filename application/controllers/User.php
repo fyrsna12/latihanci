@@ -61,12 +61,47 @@ class User extends CI_Controller
             'matches' => 'Password don\'t match!',
             'min_length' => 'Password too short!'
         ]);
+        $this->form_validation->set_rules('date_of_birth', 'Date of Birth', 'required');
         $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|trim|matches[password1]');
 
         if ($this->form_validation->run() == FALSE) {
             $this->register();
         } else {
             $email = $this->input->post('email', true);
+            $date_of_birth = $this->input->post('date_of_birth');
+            
+            // Calculate Age
+            $dob = new DateTime($date_of_birth);
+            $now = new DateTime();
+            $age = $now->diff($dob);
+            $years = $age->y;
+            $months = $age->m;
+            
+            // Auto-Placement Logic
+            $class_name = null;
+            
+            // Logic: 
+            // 4 years 0 months to < 5 years 0 months -> TK A (Age 4)
+            // 5 years 0 months to <= 6 years 0 months -> TK B (Age 5 or 6)
+            
+            if ($years < 4) {
+                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Registration Failed! Minimum age is 4 years old. Your child is '.$years.' years '.$months.' months.
+                 </div>');
+                 redirect('user/register');
+                 return;
+            } elseif ($years > 6 || ($years == 6 && $months > 0)) {
+                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Registration Failed! Maximum age is 6 years old. Your child is '.$years.' years '.$months.' months.
+                 </div>');
+                 redirect('user/register');
+                 return;
+            } elseif ($years >= 4 && $years < 5) {
+                $class_name = 'TK A';
+            } elseif ($years >= 5 && $years <= 6) {
+                $class_name = 'TK B';
+            }
+
             $data = [
                 'name' => htmlspecialchars($this->input->post('name', true)), 
                 'email' => htmlspecialchars($email), 
@@ -74,6 +109,8 @@ class User extends CI_Controller
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'id_role' => 2,
                 'is_active' => 1,
+                'date_of_birth' => $date_of_birth,
+                'class_name' => $class_name,
                 'date_created' => time()
             ];
 
@@ -89,32 +126,17 @@ class User extends CI_Controller
 
             $this->db->insert('user_token', $user_token); 
 
-            /*
-             * PERBAIKAN (FIX):
-             * Kode di bawah ini dihapus/dikomentari karena menyebabkan error "Duplicate entry" (Error 1062).
-             * 
-             * Alasan Error:
-             * Kode ini mencoba memasukkan data hak akses ke tabel 'user_access_menu' untuk Role ID 2 setiap kali user baru mendaftar.
-             * Tabel 'user_access_menu' mendefinisikan hak akses berdasarkan ROLE (Peran), bukan per USER.
-             * Karena Role ID 2 (Member) sudah ada di database dan hak aksesnya sudah didefinisikan sebelumnya,
-             * maka mencoba memasukkannya lagi akan melanggar aturan "Unique" (tidak boleh ada duplikat) pada database.
-             * 
-             * Solusi:
-             * Cukup set 'id_role' => 2 pada tabel 'user' (sudah dilakukan di atas).
-             * User baru akan otomatis mengikuti aturan hak akses yang sudah ada untuk Role 2.
-             * 
-             * Kode yang dihapus:
-             * foreach($menus_to_give_access as $menu_name) { ... }
-             */
-
             $subject = 'Account Verification';
-            $message = 'Click this link to verify your account: 
+            // Custom message with Class info
+            $message = 'Welcome to My School! <br>
+            Based on the age ('.$years.' years old), your child has been placed in <b>'.$class_name.'</b>.<br><br>
+            Click this link to verify your account: 
             <a href="'. base_url() . 'user/verify?email=' . urlencode($email) . 
             '&token=' . urlencode($token) . '">ACTIVATE ACCOUNT</a>';
             
             $this->_sendEmail($email, $subject, $message, 'verify');
             
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your account has been created! Please activate your account.</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your account has been created! You have been assigned to <b>'.$class_name.'</b>. Please activate your account.</div>');
             redirect('user'); 
         }
     }

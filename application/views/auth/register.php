@@ -59,6 +59,16 @@
                             </div>
 
                             <div class="col-12 mb-3">
+                                <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control form-control-user" id="date_of_birth" name="date_of_birth" 
+                                       value="<?= set_value('date_of_birth'); ?>" required>
+                                <div class="invalid-feedback">
+                                    Please provide your date of birth.
+                                </div>
+                                <?= form_error('date_of_birth', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+
+                            <div class="col-12 mb-3">
                                 <label for="password1_input" class="form-label">Password</label>
                                 <input type="password" class="form-control form-control-user" id="password1_input" name="password1" required>
                                 <div class="invalid-feedback">

@@ -28,11 +28,11 @@ class Admin extends CI_Controller
         
         $this->db->select('*');
         $this->db->from('user_sub_menu');
-        $this->db->where('id_menu', 3); // Hanya submenu dari "Menu"
+        $this->db->where('id_menu', 3); // submenu dari "Menu"
         $this->db->where('is_active', 1);
         $data['submenu_menu'] = $this->db->get()->result_array();
 
-        // Dashboard Stats for TK System
+        // Dashboard sistem TK
         $data['count_tk_a'] = $this->db->where('class_name', 'TK A')->count_all_results('user');
         $data['count_tk_b'] = $this->db->where('class_name', 'TK B')->count_all_results('user');
         
